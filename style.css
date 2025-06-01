@@ -1,0 +1,171 @@
+body {
+  font-family: system-ui;
+  background: #000;
+  color: white;
+  text-align: center;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+/* Moon Rotation and Pulsating */
+@keyframes moonRotation {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 140% 0%;
+  }
+  100% {
+    background-position: 300% 0%;
+  }
+}
+
+@keyframes moonPulsate {
+  0% {
+    opacity: 0.5;
+    box-shadow: inset -10px 8px 6px -5px #ffffff,
+      inset 20px -20px 40px 30px rgba(0, 0, 0, 0.9),
+      7px -6px 14px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: inset -20px 16px 12px -10px #ffffff,
+      inset 40px -40px 80px 60px rgba(0, 0, 0, 0.9),
+      14px -12px 28px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    opacity: 0.5;
+    box-shadow: inset -10px 8px 6px -5px #ffffff,
+      inset 20px -20px 40px 30px rgba(0, 0, 0, 0.9),
+      7px -6px 14px rgba(255, 255, 255, 0.2);
+  }
+}
+
+img {
+  width: 20rem;
+  height: 20rem;
+  position: absolute;
+  border-radius: 50%;
+  background-image: url("https://www.solarsystemscope.com/textures/download/2k_moon.jpg");
+  background-repeat: repeat-x;
+  background-size: 100% 100%;
+  animation: moonPulsate 7s ease-in-out infinite, spin 800s linear infinite;
+  box-shadow: inset 10px 8px 6px -5px #ffffff,
+    inset 20px -20px 40px 30px rgba(0, 0, 0, 0.9),
+    7px -6px 14px rgba(255, 255, 255, 0.32);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Stars */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 50%;
+  animation: twinkle 2s infinite;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+/* texting */
+.typing-text {
+  position: absolute;
+  top: calc(50% + 12rem);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #fff;
+  font-family: "Courier New", monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid rgba(255, 255, 255, 0.75);
+  width: 0;
+  animation: typing 4s steps(40, end) 1s forwards,
+    blinkCursor 0.8s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 33ch;
+  }
+}
+
+@keyframes blinkCursor {
+  0%,
+  100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: rgba(255, 255, 255, 0.75);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  img {
+    width: 14rem;
+    height: 14rem;
+  }
+
+  .typing-text {
+    font-size: 1.1rem;
+    top: calc(50% + 12rem);
+  }
+}
+
+@media (max-width: 480px) {
+  img {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  .typing-text {
+    font-size: 0.95rem;
+    top: calc(50% + 12rem);
+  }
+}
+
+@media (min-width: 1200px) {
+  img {
+    width: 27rem;
+    height: 27rem;
+  }
+
+  .typing-text {
+    font-size: 2rem;
+    top: calc(50% + 17rem);
+  }
+}
